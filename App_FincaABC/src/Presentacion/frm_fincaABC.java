@@ -2,6 +2,7 @@ package Presentacion;
 import Implementos.cls_validar_implementos;
 import java.util.LinkedList;
 import Datos.cls_implementos;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 public class frm_fincaABC extends javax.swing.JFrame {
@@ -154,26 +155,36 @@ public class frm_fincaABC extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 0, 0));
         jLabel10.setText("*");
+        jLabel10.setToolTipText("Sólo se aceptan números");
+        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 0, 0));
         jLabel11.setText("*");
+        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 0, 0));
         jLabel12.setText("*");
+        jLabel12.setToolTipText("Sólo se aceptan números");
+        jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 0, 0));
         jLabel13.setText("*");
+        jLabel13.setToolTipText("Sólo se aceptan números");
+        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 0, 0));
         jLabel14.setText("*");
+        jLabel14.setToolTipText("Formato dd/mm/aa");
+        jLabel14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel15.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 0, 0));
         jLabel15.setText("*");
+        jLabel15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -328,7 +339,14 @@ public class frm_fincaABC extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_nuevoActionPerformed
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-        fnt_guardarImplemento();
+         if(fnt_validacionesRegulares())
+                {
+                   fnt_guardarImplemento(); 
+                }else{
+                    JOptionPane.showMessageDialog(null, "Llena los campos correctamente.");
+                }
+        
+       
     }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void btn_consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultarActionPerformed
@@ -354,16 +372,34 @@ public class frm_fincaABC extends javax.swing.JFrame {
             objValidar.validarDatosEntrada(txt_codigo.getText(),txt_nombre.getText(),txt_cantidad.getText(),txt_precio.getText(),txt_fecha.getText(),txt_tipo.getText());
             if(objValidar.getVal()==true)
             { 
-                implementos.add(new cls_implementos(txt_codigo.getText(),txt_nombre.getText(),Integer.parseInt(txt_cantidad.getText()) ,Float.parseFloat(txt_precio.getText()) ,txt_fecha.getText(),txt_tipo.getText()));
-                btn_guardar.setEnabled(false);  
+               
+                  implementos.add(new cls_implementos(txt_codigo.getText(),txt_nombre.getText(),Integer.parseInt(txt_cantidad.getText()) ,Float.parseFloat(txt_precio.getText()) ,txt_fecha.getText(),txt_tipo.getText()));
+                  btn_guardar.setEnabled(false);   
+                  func_limpiarcolores();
+                 
                
             }     
             JOptionPane.showMessageDialog(null, objValidar.getMsn());
         }  
     }
+    private void func_limpiarcolores()
+    {
+        txt_codigo.setBackground(Color.white); 
+        txt_codigo.setForeground(Color.black);         
+          
+        txt_cantidad.setBackground(Color.white); 
+        txt_cantidad.setForeground(Color.black); 
+        
+        txt_precio.setBackground(Color.white); 
+        txt_precio.setForeground(Color.black);        
+    
+        txt_fecha.setBackground(Color.white); 
+        txt_fecha.setForeground(Color.black); 
+    }
     private void func_limpiarGeneral()
     {
-         btn_guardar.setEnabled(true);
+        func_limpiarcolores();
+        btn_guardar.setEnabled(true);
         txt_codigo.setText("");
         txt_nombre.setText("");
         txt_cantidad.setText("");
@@ -416,6 +452,84 @@ public class frm_fincaABC extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+     private boolean fnt_validacionesRegulares()
+     {
+         boolean resultado;
+         if(fnt_validarCodigo(txt_codigo.getText())&&fnt_validarCantidad(txt_cantidad.getText())&&fnt_validarPrecio(txt_precio.getText())&&fnt_validarFecha(txt_fecha.getText()))
+         {
+             resultado=true;
+         }
+         else
+         {
+            if(fnt_validarCodigo(txt_codigo.getText())==false)
+            {
+                txt_codigo.setBackground(Color.red); 
+                txt_codigo.setForeground(Color.white);         
+            }else{
+                txt_codigo.setBackground(Color.white); 
+                txt_codigo.setForeground(Color.black);               
+            }
+            
+            if(fnt_validarCantidad(txt_cantidad.getText())==false)
+            {
+                txt_cantidad.setBackground(Color.red); 
+                txt_cantidad.setForeground(Color.white); 
+            }else{
+                txt_cantidad.setBackground(Color.white); 
+                txt_cantidad.setForeground(Color.black); 
+            }
+            if(fnt_validarPrecio(txt_precio.getText())==false)
+            {
+                txt_precio.setBackground(Color.red); 
+                txt_precio.setForeground(Color.white);        
+            }else{
+                txt_precio.setBackground(Color.white); 
+                txt_precio.setForeground(Color.black);   
+            }
+            if(fnt_validarFecha(txt_fecha.getText())==false)
+            {
+                txt_fecha.setBackground(Color.red); 
+                txt_fecha.setForeground(Color.white);                         
+            }else{
+               txt_fecha.setBackground(Color.white); 
+               txt_fecha.setForeground(Color.black);     
+            }
+             resultado=false;
+         }
+            
+         return resultado;
+     }
+      private static boolean fnt_validarCantidad(String cantidad) {
+          if (cantidad == null || cantidad.isEmpty()) {
+            return false;
+        } else {
+        return cantidad.matches("[0-9]+$");
+          }
+    }
+      
+        private static boolean fnt_validarPrecio(String precio) {
+          if (precio == null || precio.isEmpty()) {
+            return false;
+        } else {
+        return precio.matches("[0-9]+$");
+          }
+    }
+         private static boolean fnt_validarCodigo(String codigo) {
+          if (codigo == null || codigo.isEmpty()) {
+            return false;
+        } else {
+        return codigo.matches("[0-9]+$");
+          }
+    }
+           private static boolean fnt_validarFecha(String fecha) {
+
+        if (fecha == null || fecha.isEmpty()) {
+            return false;
+        } else {
+            return fecha.matches("^(0?[1-9]|[12][0-9]|3[01])[\\/](0?[1-9]|1[012])[\\/]([012][0-9])\\d{2}$");
+        }
+
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
