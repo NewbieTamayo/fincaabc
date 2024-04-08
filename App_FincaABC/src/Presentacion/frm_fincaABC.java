@@ -164,6 +164,7 @@ public class frm_fincaABC extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 0, 0));
         jLabel11.setText("*");
+        jLabel11.setToolTipText("Descripción del implemento");
         jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -187,6 +188,7 @@ public class frm_fincaABC extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 0, 0));
         jLabel15.setText("*");
+        jLabel15.setToolTipText("Tipo de implemento");
         jLabel15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         tbl_implementos.setModel(new javax.swing.table.DefaultTableModel(
